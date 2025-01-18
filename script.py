@@ -48,4 +48,4 @@ app.include_router(weather.router, prefix="/weather")
 if __name__ == "__main__":
     import uvicorn
     asyncio.run(init_db(DB_ROUTE))
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("script:app", host="127.0.0.1", port=8000, reload=True)
