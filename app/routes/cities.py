@@ -35,7 +35,6 @@ async def add_city(city_request: CityRequest,
                                     (city_request.city_name,)) as cursor:
                     existing_city = await cursor.fetchone()
 
-                print(existing_city)
             if existing_city:
                 return JSONResponse(status_code=200,content={"message": f"Город {city_request.city_name} уже отслеживается."})
             
@@ -44,9 +43,11 @@ async def add_city(city_request: CityRequest,
                 (user_id, city_request.city_name, city_request.latitude, city_request.longitude)
             )
             await db.commit()
+
             async with db.execute("SELECT last_insert_rowid()") as cursor:
                 city_id_row = await cursor.fetchone()
                 city_id = city_id_row[0] if city_id_row else None
+
             try:
                 await upd_data_to_db(city_request.city_name)
             except Exception as e:
@@ -184,7 +185,7 @@ async def city(
             '''
             async with db.execute(query_weather, (city_id, query_time)) as cursor:
                 weather_record = await cursor.fetchone()
-                print(weather_record)
+
 
             if weather_record:
                 result = {param: value for param, value in zip(weather_params, weather_record)}

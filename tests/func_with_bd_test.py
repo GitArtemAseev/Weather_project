@@ -66,7 +66,6 @@ async def test_get_city_weather():
         )
         assert response.status_code == 200, f"Ожидался статус 200, но получен {response.status_code}"
         weather_data = response.json()
-        print(weather_data)
 
         assert "temperature" in weather_data, "Параметр 'temperature' отсутствует в ответе"
         assert "wind_speed" in weather_data,  "Параметр 'wind_speed' отсутствует в ответе"

@@ -25,6 +25,5 @@ async def reset_test_db():
         await db.commit()
 
     await init_db(DB_ROUTE)
-    print("База создана")
 
     yield
